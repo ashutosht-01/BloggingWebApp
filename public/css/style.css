@@ -11,9 +11,12 @@
     font-size: 12px;
     letter-spacing: 5px;
 }
-.navbar-nav  li a:hover {
-    color: #1abc9c !important;
-}
+ .navbar-nav  li a:hover {
+    color: #c75a1b !important;
+    background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+    animation:slidebg 5s linear infinite;
+} 
+
 
 .footer-padding {
 	padding-bottom: 60px;
