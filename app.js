@@ -2,24 +2,29 @@ const express=require('express');
 const bodyParser=require('body-parser');
 const ejs=require('ejs');
 const _=require('lodash');
+const mongoose=require('mongoose');
 const homecontent='this is home page content';
 const aboutcontent='this is about page content';
 const contactcontent='this is contact page content';
 const port=3000;
 const app=express();
-const posts=[];
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
-//set up the view engine
+//set up the view enginess
 app.set('view engine','ejs');
 
+mongoose.connect('mongodb://localhost/blogdb', {useNewUrlParser: true, useUnifiedTopology: true});
+const postSchema=new mongoose.Schema({
+    title:String,
+    content:String
+});
+const Post=mongoose.model('post',postSchema);
 app.get('/',function(req,res){
-    res.render('home',
-    {
-    home:homecontent,
-    post:posts
-    })
-})
+   Post.find({},function(err,posts){
+       res.render('home',{home:homecontent,post:posts});
+   })
+});
+
 
 app.get('/about',function(req,res){
     res.render('about',{about:aboutcontent});
@@ -34,21 +39,24 @@ app.get('/compose',function(req,res){
 })
 
 app.post('/compose',function(req,res){
-var post={
+const post= new Post({
     title:req.body.posttitle,
     content:req.body.postbody
-};
-posts.push(post);
-res.redirect('/');
+});
+post.save(function(err){
+    if(!err)
+    res.redirect('/');
+});
 })
-//route parameters 
-app.get('/posts/:postname',function(req,res){
-    var requestedtitle=_.lowerCase(req.params.postname);
-    for(let i=0;i<posts.length;i++)
-    {
-        if(_.lowerCase(posts[i].title)==requestedtitle)
-        res.render('post',{title:posts[i].title,content:posts[i].content});
-    }
+//using route parameters
+app.get('/posts/:postid',function(req,res){
+    var requestedpostid=(req.params.postid);
+    Post.findOne({_id:requestedpostid},function(err,post){
+        if(!err)
+        res.render('post',{title:post.title,content:post.content});
+        else
+        console.log(err);
+    })
 })
 app.listen(port,function(){
     console.log(`server started running on port ${port}`);

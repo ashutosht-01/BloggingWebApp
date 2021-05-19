@@ -3,6 +3,6 @@
 <p><%=home%></p>
 <% post.forEach(function(pst){  %>
      <h1><%=pst.title %></h1>      
-     <p><%=pst.content.substring(0,10) +  ' ...'%>  <a href='posts/<%= pst.title %>'>Read More</a>   </p>     
+     <p><%=pst.content.substring(0,10) +  ' ...'%>  <a href='posts/<%= pst._id %>'>Read More</a>   </p>     
 <%  })                           %>     
 <%- include('partials/footer'); -%>
