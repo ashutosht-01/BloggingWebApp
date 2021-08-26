@@ -1,14 +1,32 @@
 <%- include('partials/header'); -%>
-<h1>Compose</h1>
+<div style="  text-align: center;">
+<h1>Write a Post</h1>
+</div>
+<div style="border:3px solid black;margin-left: 10vw;margin-right: 10vw;background-color: #121112; ">
 <form action="/compose" method="POST">
     <div class="mb-3">
-      <label for="Title" class="form-label">Title</label>
-      <input name="posttitle" type="text" class="form-control" id="Title">
+      <label for="Title" class="form-label" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Title</label>
+      <input name="posttitle" type="text" class="form-control" id="Title" autocomplete="off" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1"  style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Image</label><br>
+      <input name="postimage" style="background-color: #121112;width:99%;"size="160" class="btn btn-primary" type="file" class="form-control" id="formGroupExampleInput" required/>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" >Image Info</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" name="imginfo" required style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
     </div>
     <div class="mb-3">
-      <label for="post" class="form-label">Post</label>
-      <textarea name="postbody" class="form-control" id="post" rows="5" col="30"></textarea>
+      <label for="post" class="form-label" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Post</label>
+      <textarea name="postcontent" class="form-control" id="post" rows="5" col="30" autocomplete="off" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"></textarea>
     </div>
-<button type="submit" name="btn" class="btn btn-primary ">publish</button>
+<button type="submit" name="btn" class="btn btn-success ">publish</button>
 </form>
-<%- include('partials/footer'); -%>
+</div>
+<footer>
+  <div id="footermn">
+         <p id="copyrighttxt">© ashu-2021</p>
+  </div>
+</footer>
+</body>
+</html>

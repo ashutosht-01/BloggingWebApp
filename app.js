@@ -3,25 +3,31 @@ const bodyParser=require('body-parser');
 const ejs=require('ejs');
 const _=require('lodash');
 const mongoose=require('mongoose');
-const homecontent='this is home page content';
 const aboutcontent='this is about page content';
 const contactcontent='this is contact page content';
 const port=3000;
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'));
-//set up the view enginess
+//set up the view engine
 app.set('view engine','ejs');
 
 mongoose.connect('mongodb://localhost/blogdb', {useNewUrlParser: true, useUnifiedTopology: true});
 const postSchema=new mongoose.Schema({
     title:String,
+    image:String,
     content:String
 });
 const Post=mongoose.model('post',postSchema);
 app.get('/',function(req,res){
    Post.find({},function(err,posts){
-       res.render('home',{home:homecontent,post:posts});
+       if(posts)
+       {
+           console.log(posts);
+       res.render('home',{post:posts});
+       }
+       else if(err)
+       console.log(err);
    })
 });
 
@@ -39,9 +45,16 @@ app.get('/compose',function(req,res){
 })
 
 app.post('/compose',function(req,res){
+    const Title=req.body.posttitle;
+    const Image=req.body.imginfo;
+    const Content=req.body.postcontent;
+    console.log("title= "+Title);
+    console.log("content "+Content);
+    console.log("Image= "+Image);
 const post= new Post({
-    title:req.body.posttitle,
-    content:req.body.postbody
+    title:Title,
+    image:Image,
+    content:Content
 });
 post.save(function(err){
     if(!err)
@@ -53,7 +66,7 @@ app.get('/posts/:postid',function(req,res){
     var requestedpostid=(req.params.postid);
     Post.findOne({_id:requestedpostid},function(err,post){
         if(!err)
-        res.render('post',{title:post.title,content:post.content});
+        res.render('post',{title:post.title,image:post.image,content:post.content});
         else
         console.log(err);
     })

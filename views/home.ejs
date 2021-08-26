@@ -1,8 +1,22 @@
 <%- include('partials/header'); -%>
-<h1>Home</h1>
-<p><%=home%></p>
-<% post.forEach(function(pst){  %>
-     <h1><%=pst.title %></h1>      
-     <p><%=pst.content.substring(0,10) +  ' ...'%>  <a href='posts/<%= pst._id %>'>Read More</a>   </p>     
-<%  })                           %>     
-<%- include('partials/footer'); -%>
+<h1>Latest Updates</h1>
+<% for(var i = post.length-1 ; i>=0 ; i--){ %>
+     <div class="card bg-light mb-3  card text-left" style="max-width: 100%;">
+       <div class="card-header" style="background-color: #222425!important; color:white" ><h1 ><%= post[i].title %></h1></div>
+       <div  id="postimagecontainer"><img class="post-image" style="border:2px solid black" src="<%=post[i].image%>"></div>
+       <div class="card-body">
+         <p class="card text-left" style="width: 18rem; color: black;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+           <%= post[i].content+"..." %><a class="readmore" href="/posts/<%=post[i]._id%>">Read more</a>
+         </p>
+       </div>
+      </div>
+        
+    
+  <% } %>
+<footer>
+     <div id="footermn">
+            <p id="copyrighttxt">© ashu-2021</p>
+     </div>
+   </footer>
+   </body>
+   </html>
