@@ -18,6 +18,7 @@ const postSchema=new mongoose.Schema({
     image:String,
     content:String
 });
+
 const Post=mongoose.model('post',postSchema);
 app.get('/',function(req,res){
    Post.find({},function(err,posts){
@@ -31,7 +32,6 @@ app.get('/',function(req,res){
    })
 });
 
-
 app.get('/about',function(req,res){
     res.render('about',{about:aboutcontent});
 })
@@ -44,13 +44,18 @@ app.get('/compose',function(req,res){
     res.render('compose');
 })
 
+app.get('/register',function(req,res){
+    res.render('register');
+})
+
+app.get('/login',function(req,res){
+    res.render('login');
+})
+
 app.post('/compose',function(req,res){
     const Title=req.body.posttitle;
     const Image=req.body.imginfo;
     const Content=req.body.postcontent;
-    console.log("title= "+Title);
-    console.log("content "+Content);
-    console.log("Image= "+Image);
 const post= new Post({
     title:Title,
     image:Image,
@@ -71,6 +76,7 @@ app.get('/posts/:postid',function(req,res){
         console.log(err);
     })
 })
+
 app.listen(port,function(){
     console.log(`server started running on port ${port}`);
 }) 
