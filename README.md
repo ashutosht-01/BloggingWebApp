@@ -7,5 +7,5 @@ Tech Stack Used : <br/>
 3.Bootstrap CSS <br/> 
 ⋅⋅*Back-End <br/> 
 1.Node.js <br/> 
-2.Express.js <br/>  
-3.MongoDB (mongoose) 
+2.Express.js<br/>  
+3.MongoDB(mongoose) 
