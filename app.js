@@ -11,7 +11,6 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 
 const aboutcontent = "This is my daily journal blog web app. Here you can easily post your daily journals & usefull blogs. This is user friendly. Here you will get regular updates. All posts are secured and safe. You can easily write your post by simply signing up to our application. I have also given Google Authentication to our application so our application is 100% secured and safe."
-const port=3000;
 const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
@@ -178,6 +177,11 @@ app.get('/posts/:postid',function(req,res){
     })
 })
 
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+
 app.listen(port,function(){
-    console.log(`server started running on port ${port}`);
+    console.log("server successfully started running ");
 }) 
