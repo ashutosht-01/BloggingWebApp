@@ -17,7 +17,9 @@
   color: #da2d0f !important;
 }
 
-
+.card-body a:hover{
+  color: #28a745 !important;
+}
 #footermain{
   background-color:#343a40!important;
   padding: 1%;
@@ -45,6 +47,20 @@ bottom: 0px;
 .btn{
   margin-left: 10px;
 }
+
+.centered {
+  padding-top: 200px;
+  text-align: center;
+}
+
+.secret-text {
+text-align: center;
+font-size: 2rem;
+color: #fff;
+background-color: #000;
+}
+
+
 #footermn{
   background-color:#343a40!important;
   padding: 1%;
@@ -66,3 +82,7 @@ bottom: 0px;
   margin-right: 10px;
   text-align: center;
 }
+@font-face { 
+  font-family: "FontAwesome";
+  src: url("fonts/fontawesome-webfont.eot");
+  }
