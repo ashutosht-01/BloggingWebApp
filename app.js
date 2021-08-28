@@ -5,16 +5,12 @@ const mongoose = require("mongoose");
 const _=require('lodash');
 const session = require('express-session');
 const passport = require("passport");
-const md5=require('md5');   
 const passportLocalMongoose = require("passport-local-mongoose");
 const ejs = require("ejs");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 
-
-const contactcontent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
-const aboutcontent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
-
+const aboutcontent = "This is my daily journal blog web app. Here you can easily post your daily journals & usefull blogs. This is user friendly. Here you will get regular updates. All posts are secured and safe. You can easily write your post by simply signing up to our application. I have also given Google Authentication to our application so our application is 100% secured and safe."
 const port=3000;
 const app = express();
 app.set('view engine', 'ejs');
@@ -30,7 +26,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/blogdb", {useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://c_a_1:1769@test.cq9r0.mongodb.net/blogdb", {useNewUrlParser: true,useUnifiedTopology: true});
 mongoose.set("useCreateIndex", true);
 
 const postSchema = new mongoose.Schema({
@@ -110,7 +106,7 @@ app.get('/comp',function(req,res){
     res.render('comp');
 })
 app.get('/contact',function(req,res){
-    res.render('contact',{contact:contactcontent});
+    res.render('contact');
 })
 
 app.get('/compose',function(req,res){
@@ -127,8 +123,8 @@ app.get('/register',function(req,res){
 
 app.post('/register',function(req,res){
     const newuser=new User({
-        email:req.body.email,                //DataBase Encryption
-        passward:md5(req.body.passward)      //md5= is a js package for safr hashing of passward   
+        email:req.body.email,
+        passward:req.body.passward       
     })
     newuser.save(function(err){
         if(!err)
@@ -138,7 +134,7 @@ app.post('/register',function(req,res){
 })
 
 app.post('/login',function(req,res){
-   const username=req.body.username;
+   const username=req.body.email;
    const passward=req.body.passward;
    User.findOne({email:username},function(err,founduser){
        if(err)  
